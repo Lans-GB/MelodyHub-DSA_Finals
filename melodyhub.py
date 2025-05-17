@@ -102,7 +102,6 @@ def generate_playlist():
     else:
         print("\nInvalid selection.")
 
-Rance Jherome
 def remove_music():
     """
     Display all stored music (alphabetically by title) and let the user remove one by number.
