@@ -102,23 +102,34 @@ def generate_playlist():
     else:
         print("\nInvalid selection.")
 
+Rance Jherome
 def remove_music():
-    # Remove music by number
+    """
+    Display all stored music (alphabetically by title) and let the user remove one by number.
+    Handles invalid numbers and empty list situations.
+    """
     print("\n--- Remove Music ---")
     if music_list:
-        for i, music in enumerate(music_list, 1):
+        # Create a sorted copy of the list based on title
+        sorted_music = sorted(music_list, key=lambda m: m['title'].lower())
+
+        for i, music in enumerate(sorted_music, 1):
             print(f"{i}. {music['title']} by {music['artist']}")
+
         try:
-            choice = int(input("Enter number to remove: "))
-            if 1 <= choice <= len(music_list):
-                removed = music_list.pop(choice - 1)
-                print(f"\nRemoved '{removed['title']}' by {removed['artist']}.")
+            music_to_remove = int(input("Enter the number of the music to remove: "))
+            if 1 <= music_to_remove <= len(sorted_music):
+                # Find the selected music in the sorted list
+                selected_music = sorted_music[music_to_remove - 1]
+                # Find and remove it from the original music list
+                music_list.remove(selected_music)
+                print(f"\nRemoved '{selected_music['title']}' by {selected_music['artist']}.")
             else:
                 print("\nInvalid number.")
         except ValueError:
-            print("\nPlease enter a number.")
+            print("\nPlease enter a valid number.")
     else:
-        print("No music to remove.")
+        print("No music available to remove.")
 
 def main():
     # Main program loop
